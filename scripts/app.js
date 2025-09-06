@@ -68,7 +68,260 @@ const Data = {
     const res = await fetch("categories.json");
     Data.categories = await res.json();
   },
-  allProducts(){ return Storage.get(Keys.products, []); },
+  allProducts(){ 
+  // const defaultProducts = [
+  //   {
+  //     id: "d1",
+  //     ownerId: "system",
+  //     title: "Wireless Headphones",
+  //     category: "Electronics",
+  //     description: "High quality sound with noise cancellation.",
+  //     price: 2999,
+  //     image: "https://m.media-amazon.com/images/I/71ogmklCZDL._SX466_.jpg"
+  //   },
+  //   {
+  //     id: "d2",
+  //     ownerId: "system",
+  //     title: "Smart Watch",
+  //     category: "Electronics",
+  //     description: "Track your fitness and notifications.",
+  //     price: 4499,
+  //     image: "https://m.media-amazon.com/images/I/61rmkmqD5VL._SX466_.jpg"
+  //   },
+  //   {
+  //     id: "d3",
+  //     ownerId: "system",
+  //     title: "Bluetooth Speaker",
+  //     category: "Electronics",
+  //     description: "Portable and powerful bass.",
+  //     price: 1999,
+  //     image: "https://m.media-amazon.com/images/I/61kQ3rY82ML._AC_UY327_FMwebp_QL65_.jpg"
+  //   }
+  // ];
+
+  const defaultProducts = [
+  // Electronics
+  {
+    id: 'd1', ownerId: 'system', title: 'Wireless Headphones',
+    category: 'Electronics', description: 'High quality sound with noise cancellation.',
+    price: 2999, image: 'https://m.media-amazon.com/images/I/71ogmklCZDL._SX466_.jpg'
+  },
+  {
+    id: 'd2', ownerId: 'system', title: 'Smart Watch',
+    category: 'Electronics', description: 'Track your fitness and notifications.',
+    price: 4499, image: 'https://m.media-amazon.com/images/I/61rmkmqD5VL._SX466_.jpg'
+  },
+  {
+    id: 'd3', ownerId: 'system', title: 'Bluetooth Speaker',
+    category: 'Electronics', description: 'Portable and powerful bass.',
+    price: 1999, image: 'https://m.media-amazon.com/images/I/61kQ3rY82ML._AC_UY327_FMwebp_QL65_.jpg'
+  },
+
+  // Fashion
+  {
+    id: 'd4', ownerId: 'system', title: 'Men’s Leather Jacket',
+    category: 'Fashion', description: 'Classic biker-style genuine leather jacket.',
+    price: 7999, image: 'https://m.media-amazon.com/images/I/61Rkv7WLP0L._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd5', ownerId: 'system', title: 'Floral Summer Dress',
+    category: 'Fashion', description: 'Lightweight and airy, perfect for sunny days.',
+    price: 2499, image: 'https://m.media-amazon.com/images/I/71m1RicH-AL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd6', ownerId: 'system', title: 'Sports Shoes',
+    category: 'Fashion', description: 'Cushioned running shoes with breathable upper.',
+    price: 3499, image: 'https://m.media-amazon.com/images/I/71ESgDF-QnL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+
+  // Home & Living
+  {
+    id: 'd7', ownerId: 'system', title: 'Ceramic Vase Set',
+    category: 'Home & Living', description: 'Set of 3 stylish ceramic vases.',
+    price: 1299, image: 'https://m.media-amazon.com/images/I/71ulohdLT0L._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd8', ownerId: 'system', title: 'Desk Lamp with Touch Control',
+    category: 'Home & Living', description: 'Adjustable LED lamp with touch dimmer.',
+    price: 1599, image: 'https://m.media-amazon.com/images/I/51DcV4YJw2L._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd9', ownerId: 'system', title: 'Decorative Cushion Covers',
+    category: 'Home & Living', description: 'Set of 4 cotton cushion covers, 18"x18".',
+    price: 799, image: 'https://m.media-amazon.com/images/I/71znmLQO9tL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+
+  // Books
+  {
+    id: 'd10', ownerId: 'system', title: 'The Alchemist – Paulo Coelho',
+    category: 'Books', description: 'A bestselling novel of self-discovery.',
+    price: 399, image: 'https://m.media-amazon.com/images/I/617lxveUjYL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd11', ownerId: 'system', title: 'Atomic Habits – James Clear',
+    category: 'Books', description: 'Build good habits and break bad ones.',
+    price: 499, image: 'https://m.media-amazon.com/images/I/81F90H7hnML._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd12', ownerId: 'system', title: 'The Power of Now – Eckhart Tolle',
+    category: 'Books', description: 'Guide to spiritual enlightenment.',
+    price: 449, image: 'https://m.media-amazon.com/images/I/71I6MaZsCcL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+
+  // Sports & Outdoors
+  {
+    id: 'd13', ownerId: 'system', title: 'Yoga Mat',
+    category: 'Sports & Outdoors', description: 'Non-slip, eco-friendly yoga mat.',
+    price: 999, image: 'https://m.media-amazon.com/images/I/61XpuAiwzsL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd14', ownerId: 'system', title: 'Stainless Steel Water Bottle',
+    category: 'Sports & Outdoors', description: 'Vacuum insulated, 750ml.',
+    price: 699, image: 'https://m.media-amazon.com/images/I/71i--IbCPdL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd15', ownerId: 'system', title: 'Camping Tent (2-person)',
+    category: 'Sports & Outdoors', description: 'Lightweight and waterproof tent.',
+    price: 3499, image: 'https://m.media-amazon.com/images/I/81Qi90HHsML._AC_UL480_FMwebp_QL65_.jpg'
+  },
+
+  // Toys & Games
+  {
+    id: 'd16', ownerId: 'system', title: 'Building Blocks Set',
+    category: 'Toys & Games', description: '300-piece building block for kids.',
+    price: 1599, image: 'https://m.media-amazon.com/images/I/713IrB+HcRL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd17', ownerId: 'system', title: 'Remote Control Car',
+    category: 'Toys & Games', description: 'Off-road RC car, rechargeable.',
+    price: 2999, image: 'https://m.media-amazon.com/images/I/717pTcRrigL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd18', ownerId: 'system', title: 'Puzzle Game Board',
+    category: 'Toys & Games', description: '1,000-piece landscape puzzle.',
+    price: 699, image: 'https://m.media-amazon.com/images/I/81lDrAS14VL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+
+  // Automotive
+  {
+    id: 'd19', ownerId: 'system', title: 'Car Phone Holder',
+    category: 'Automotive', description: '360° rotating dashboard phone mount.',
+    price: 499, image: 'https://m.media-amazon.com/images/I/51QjPTTgErL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd20', ownerId: 'system', title: 'Universal Car Charger',
+    category: 'Automotive', description: 'Quick charge USB-C and USB-A port.',
+    price: 599, image: 'https://m.media-amazon.com/images/I/71RaZGNnyvL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd21', ownerId: 'system', title: 'Trunk Organizer',
+    category: 'Automotive', description: 'Collapsible and multi-compartment organizer.',
+    price: 1499, image: 'https://m.media-amazon.com/images/I/81hof5iL9-L._AC_UL480_FMwebp_QL65_.jpg'
+  },
+
+  // Others
+  {
+    id: 'd22', ownerId: 'system', title: 'Wireless Earbuds',
+    category: 'Others', description: 'Compact earbuds with charging case.',
+    price: 2499, image: 'https://m.media-amazon.com/images/I/71MYal3qCOL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd23', ownerId: 'system', title: 'Portable Blender',
+    category: 'Others', description: 'USB rechargeable mini blender.',
+    price: 1999, image: 'https://m.media-amazon.com/images/I/71FxfwiatQL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd24', ownerId: 'system', title: 'Mini Projector',
+    category: 'Others', description: 'Pocket-sized HD projector with HDMI input.',
+    price: 4999, image: 'https://m.media-amazon.com/images/I/61dD-ZZV-nL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+
+  // Additional items to exceed 30 products
+  {
+    id: 'd25', ownerId: 'system', title: 'Solar Power Bank',
+    category: 'Electronics', description: 'Emergency solar charger, 10,000 mAh.',
+    price: 1899, image: 'https://m.media-amazon.com/images/I/61zsaas+4PL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd26', ownerId: 'system', title: 'Scarves (Pack of 2)',
+    category: 'Fashion', description: 'Silk scarves, 90 × 90 cm.',
+    price: 1299, image: 'https://m.media-amazon.com/images/I/81qvLXn6imS._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd27', ownerId: 'system', title: 'Scented Candle Set',
+    category: 'Home & Living', description: '3 aromas, soy wax candles.',
+    price: 999, image: 'https://m.media-amazon.com/images/I/71jjz-5smgL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd28', ownerId: 'system', title: 'Thriller Novel',
+    category: 'Books', description: 'Gripping mystery thriller.',
+    price: 349, image: 'https://m.media-amazon.com/images/I/819Rc0S4ENL._AC_UY327_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd29', ownerId: 'system', title: 'Fitness Resistance Band',
+    category: 'Sports & Outdoors', description: 'Set of 5 resistance levels.',
+    price: 799, image: 'https://m.media-amazon.com/images/I/71RQg5h4DTL._AC_UL480_FMwebp_QL65_.jpg'
+  },
+  {
+    id: 'd30', ownerId: 'system', title: 'Board Game',
+    category: 'Toys & Games', description: 'Classic strategy board game.',
+    price: 1599, image: 'https://m.media-amazon.com/images/I/81wDJT7QUcL._AC_UL480_FMwebp_QL65_.jpg'
+  }, 
+  {
+  id: "d25",
+  ownerId: "system",
+  title: "Portable Sewing Kit",
+  category: "Other",
+  description: "Compact sewing kit with needles, threads, and scissors.",
+  price: 299,
+  image: "https://m.media-amazon.com/images/I/81MZEiviVlL._AC_UL480_FMwebp_QL65_.jpg"
+},
+{
+  id: "d26",
+  ownerId: "system",
+  title: "Mini Desk Organizer",
+  category: "Other",
+  description: "Keep your pens, notes, and accessories neatly arranged.",
+  price: 399,
+  image: "https://m.media-amazon.com/images/I/71KEqN4Aw2L._AC_UL480_FMwebp_QL65_.jpg"
+},
+{
+  id: "d27",
+  ownerId: "system",
+  title: "LED Keychain Light",
+  category: "Other",
+  description: "Small yet powerful LED flashlight keychain.",
+  price: 149,
+  image: "https://m.media-amazon.com/images/I/81qMQIyqsBL._AC_UL480_FMwebp_QL65_.jpg"
+},
+{
+  id: "d28",
+  ownerId: "system",
+  title: "Travel Neck Pillow",
+  category: "Other",
+  description: "Soft memory foam pillow for comfortable travel.",
+  price: 799,
+  image: "https://m.media-amazon.com/images/I/61ktHYSbSIL._AC_UL480_FMwebp_QL65_.jpg"
+},
+{
+  id: "d29",
+  ownerId: "system",
+  title: "Reusable Shopping Bag",
+  category: "Other",
+  description: "Eco-friendly foldable shopping bag, washable and durable.",
+  price: 199,
+  image: "https://m.media-amazon.com/images/I/71+AgyrTYYL._AC_UL480_FMwebp_QL65_.jpg"
+}
+
+];
+
+
+  // ✅ get user-added products from storage
+  const userProducts = Storage.get(Keys.products, []);
+
+  // ✅ return both combined
+  return [...defaultProducts, ...userProducts];
+},
   saveProducts(list){ Storage.set(Keys.products, list); },
   myProducts(uid){ return Data.allProducts().filter(p => p.ownerId === uid); },
   addProduct(p){
